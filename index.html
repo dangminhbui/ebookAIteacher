@@ -1330,12 +1330,18 @@
                             <li>Kiểm tra kỹ các liên kết và tính logic của trò chơi. Chia sẻ dưới dạng "Đường liên kết chỉ xem" hoặc tải về dưới dạng PDF tương tác (nếu hỗ trợ).</li>
                         </ol>
                          <div class="image-container my-2">
-                            <!-- Gợi ý tìm kiếm hình ảnh: "giao diện Canva tạo game giáo dục AI" -->
-                            <img src="https://placehold.co/500x300/0A2342/FBC02D?text=Canva+AI+Tạo+Game" alt="Canva AI tạo game">
-                            <p class="image-caption">Giao diện Canva AI đang tạo một trò chơi đơn giản.</p>
-                        </div>
-                        <!-- Gợi ý video YouTube: "hướng dẫn tạo game tương tác bằng Canva AI" -->
                         
+                        <!-- Gợi ý video YouTube: "hướng dẫn tạo game tương tác bằng Canva AI" -->
+                        <div class="video-container my-3">
+    <iframe 
+        src="https://www.youtube.com/embed/rKm4cMkEikQ" 
+        title="Hướng dẫn tạo game tương tác bằng Canva AI" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+    </iframe>
+</div>
+<p class="text-xs text-gray-500 text-center">(Video hướng dẫn chi tiết cách tạo game tương tác bằng Canva AI)</p>
                         <div class="interactive-box mt-8">
                             <h4 class="text-lg font-semibold text-navy-primary mb-3"><i class="fas fa-clipboard-list mr-2 text-gold-accent"></i>Checklist Thực Hiện Dự Án</h4>
                             <ul class="list-none pl-0 space-y-1">
@@ -1558,6 +1564,7 @@
 
 
             function loadChapter(chapterId, searchTerm = null) {
+    // ...existing code...
                 const chapter = ebookData.chapters.find(c => c.id === chapterId);
                 if (!chapter) {
                     ebookContentArea.innerHTML = `<p class="text-red-500">Lỗi: Không tìm thấy chương.</p>`;
@@ -2316,48 +2323,10 @@ function getAdjacentChapters(currentChapterId) {
         next: currentIndex < chapters.length - 1 ? chapters[currentIndex + 1] : null
     };
 }
-function loadChapter(chapterId, searchTerm = null) {
-    // Thêm loading state khi bắt đầu tải
-    showLoadingState();
-    
-    try {
-        const chapter = ebookData.chapters.find(c => c.id === chapterId);
-        if (!chapter) {
-            ebookContentArea.innerHTML = `<p class="text-red-500">Lỗi: Không tìm thấy chương.</p>`;
-            return;
-        }
-        // ...existing code...
-    } catch(error) {
-        console.error("Error loading chapter:", error);
-        ebookContentArea.innerHTML = `
-            <div class="error-state p-4 bg-red-50 rounded-lg">
-                <h3 class="text-red-600">Lỗi tải nội dung</h3>
-                <p>Đã xảy ra lỗi khi tải chương. Vui lòng thử lại.</p>
-            </div>
-        `;
-    }
-}   
-function loadChapter(chapterId, searchTerm = null) {
-    // ...existing code...
-    
-    let content = `${chapter.contentHTML}`;
-                    loadChapter(currentChapterId, searchTerm); 
-                }
-            });
-
-
-            const lastChapter = localStorage.getItem('lastVisitedChapter');
-            if (lastChapter && ebookData.chapters.find(c => c.id === lastChapter)) {
-                loadChapter(lastChapter);
-            } else if (ebookData.chapters.length > 0) {
-                loadChapter(ebookData.chapters[0].id); 
-            }
-            // Ensure main title is rendered if no chapter is loaded initially (e.g., on fresh load without lastChapter)
-             if (!currentChapterId && mainEbookTitleDesktop) { // Check if mainEbookTitleDesktop exists
-                mainEbookTitleDesktop.textContent = ebookData.meta.title;
-            }
-const { prev, next } = getAdjacentChapters(chapterId);
-    content += `
+function addNavigationButtons(content, chapterId) {
+    const { prev, next } = getAdjacentChapters(chapterId);
+    return `
+        ${content}
         <div class="navigation-buttons fixed bottom-4 left-0 right-0 flex justify-center space-x-4 p-4 md:static md:mt-8 bg-white bg-opacity-90 shadow-lg z-40">
             ${prev ? `
                 <button onclick="loadChapter('${prev.id}')" 
@@ -2378,10 +2347,65 @@ const { prev, next } = getAdjacentChapters(chapterId);
             ` : ''}
         </div>
     `;
-
-    ebookContentArea.innerHTML = content;
+}
+function loadChapter(chapterId, searchTerm = null) {
+    showLoadingState();
     
-    // ...rest of existing code...
+    try {
+        const chapter = ebookData.chapters.find(c => c.id === chapterId);
+        if (!chapter) {
+            ebookContentArea.innerHTML = `<p class="text-red-500">Lỗi: Không tìm thấy chương.</p>`;
+            return;
+        }
+
+        currentChapterId = chapterId;
+        let content = ``;
+        
+        // Add chapter title
+        if (chapter.id !== "loiMoDau" && chapter.id !== "loiKet") {
+            content += `<h1 class="text-3xl font-bold text-navy-primary mb-2">${chapter.title}</h1>`;
+        }
+        
+        // Add chapter content
+        content += chapter.contentHTML;
+
+        // Add summary if exists
+        if (chapter.summary && chapter.summary.length > 0) {
+            content += `<div class="mt-10 pt-6 border-t-2 border-gold-accent">...</div>`;
+        }
+
+        content = addNavigationButtons(content, chapterId);
+        `;
+
+        ebookContentArea.innerHTML = content;
+        
+        // Update UI elements
+        mobileChapterTitle.textContent = chapter.title;
+        setupInteractiveElements();
+        loadHighlightsAndNotes();
+
+        if (searchTerm && searchTerm.length > 0) {
+            highlightSearchTermInContent(searchTerm);
+        }
+
+        // Update navigation menu
+        document.querySelectorAll('#navigation-menu a').forEach(a => {
+            a.classList.toggle('active', a.dataset.chapterId === chapterId);
+        });
+        
+        // Scroll to top
+        document.getElementById('main-content').scrollTop = 0;
+        localStorage.setItem('lastVisitedChapter', chapterId);
+
+    } catch(error) {
+        console.error("Error loading chapter:", error);
+        ebookContentArea.innerHTML = `
+            <div class="error-state p-4 bg-red-50 rounded-lg">
+                <h3 class="text-red-600">Lỗi tải nội dung</h3>
+                <p>Đã xảy ra lỗi khi tải chương. Vui lòng thử lại.</p>
+            </div>
+        `;
+    }
 }
 
         });
