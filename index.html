@@ -1044,7 +1044,7 @@
                          <div class="mb-6 p-4 border rounded-lg shadow-sm">
                             <h5 class="font-semibold text-lg text-gold-accent">Tome.app</h5>
                             <!-- Gợi ý tìm kiếm hình ảnh: "logo Tome.app" -->
-                             <img src="hhttps://i.postimg.cc/bJyc2xBT/doanh-nghi-p-t-ng-hi-u-su-t-l-m-vi-c-1.png" alt="Tome.app Logo" class="my-2 h-10">
+                             <img src="https://i.postimg.cc/bJyc2xBT/doanh-nghi-p-t-ng-hi-u-su-t-l-m-vi-c-1.png" alt="Tome.app Logo" class="my-2 h-10">
                             <p><strong>Giới thiệu:</strong> Tương tự Gamma, tập trung vào việc kể chuyện bằng slide, tích hợp AI tạo hình ảnh.</p>
                             <p><strong>Tính năng cho giáo viên:</strong> Tạo bài giảng có tính kể chuyện, trực quan hóa ý tưởng.</p>
                             <p><strong>Ví dụ ứng dụng:</strong> "Tạo một câu chuyện tương tác về vòng đời của bướm."</p>
@@ -1750,10 +1750,15 @@
                 submitGeminiPromptBtn.disabled = true;
 
                 try {
-                    let chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
-                    const payload = { contents: chatHistory };
-                    const apiKey = ""; 
-                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+                    const payload = {
+  contents: [{
+    parts: [{
+      text: prompt
+    }]
+  }]
+};
+                    const apiKey = "AIzaSyDq9YTwEXlta0-diaqVfkHgSuT6maAVDoo"; 
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=${apiKey}`;
                     
                     const response = await fetch(apiUrl, {
                         method: 'POST',
@@ -1785,12 +1790,30 @@
                     }
 
                 } catch (error) {
-                    console.error("Error calling Gemini API:", error);
-                    geminiResponseArea.innerHTML = `<p class="text-red-500">Đã xảy ra lỗi khi kết nối với Gemini: ${error.message}. Vui lòng thử lại sau.</p>`;
-                } finally {
-                    geminiLoadingIndicator.classList.add('hidden');
-                    submitGeminiPromptBtn.disabled = false;
-                }
+    console.error("Error calling Gemini API:", error);
+    let errorMessage = "Đã xảy ra lỗi không xác định";
+    
+    if (error.message.includes("API key")) {
+        errorMessage = "API key không hợp lệ hoặc hết hạn";
+    } else if (error.message.includes("quota")) {
+        errorMessage = "Đã vượt quá giới hạn yêu cầu API";
+    } else if (error.message.includes("rate limit")) {
+        errorMessage = "Quá nhiều yêu cầu trong thời gian ngắn. Vui lòng thử lại sau.";
+    } else if (error.message.includes("network")) {
+        errorMessage = "Lỗi kết nối mạng. Vui lòng kiểm tra kết nối internet.";
+    }
+
+    geminiResponseArea.innerHTML = `
+        <div class="p-4 bg-red-50 border border-red-200 rounded-lg">
+            <p class="text-red-600 font-medium mb-2">
+                <i class="fas fa-exclamation-circle mr-2"></i>Lỗi
+            </p>
+            <p class="text-red-700">${errorMessage}</p>
+        </div>`;
+} finally {
+    geminiLoadingIndicator.classList.add('hidden');
+    submitGeminiPromptBtn.disabled = false;
+}
             });
 
             function openNotesModal(context, existingNote = '') {
