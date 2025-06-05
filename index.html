@@ -15,7 +15,41 @@
             --bg-light: #f8f9fa;
             --bg-white: #FFFFFF;
         }
+<style>
+    /* ...existing styles... */
 
+    /* Styles cho nút chuyển trang */
+    .navigation-buttons {
+        background: linear-gradient(to top, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.95) 80%, rgba(255,255,255,0) 100%);
+        padding-top: 2rem;
+        transition: all 0.3s ease;
+    }
+
+    .navigation-buttons button {
+        transition: all 0.2s ease;
+    }
+
+    .navigation-buttons button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    @media (max-width: 768px) {
+        .navigation-buttons {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem;
+            z-index: 40;
+        }
+
+        .navigation-buttons button {
+            min-width: 100px;
+            padding: 0.75rem 1rem;
+        }
+    }
+</style>
         body {
             font-family: 'Inter', sans-serif;
             color: var(--text-main);
@@ -1757,7 +1791,8 @@
     }]
   }]
 };
-                    const apiKey = "AIzaSyDq9YTwEXlta0-diaqVfkHgSuT6maAVDoo"; 
+                    // Không nên để API key trực tiếp trong code
+const apiKey = process.env.GEMINI_API_KEY || "AIzaSyD1JQvbijNsRV5xr9CESIY0Iuw6YVfLP3o"; 
                     const apiUrl = `https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=${apiKey}`;
                     
                     const response = await fetch(apiUrl, {
@@ -2190,7 +2225,55 @@
                     }
                 });
             }
-            
+            // Thêm hàm này sau phần loadHighlightsForChapter và loadNotesForChapter
+
+function loadHighlightsAndNotes() {
+    // Batch DOM updates để tránh reflow/repaint liên tục
+    requestAnimationFrame(() => {
+        // Cache DOM queries
+        const highlights = JSON.parse(localStorage.getItem(`ebook_highlights_${currentChapterId}`)) || [];
+        const notes = JSON.parse(localStorage.getItem(`ebook_notes_${currentChapterId}`)) || {};
+        
+        // Tạo DocumentFragment để batch các thay đổi DOM
+        const fragment = document.createDocumentFragment();
+        
+        // Xóa highlights/notes cũ trong một lần thao tác
+        const existingHighlights = ebookContentArea.querySelectorAll('.highlighted-text');
+        existingHighlights.forEach(h => h.remove());
+        
+        const existingNotes = ebookContentArea.querySelectorAll('.note-indicator');
+        existingNotes.forEach(n => n.remove());
+        
+        // Áp dụng highlights mới
+        highlights.forEach(h => {
+            const range = deserializeRange(h.range);
+            if (range) {
+                applyHighlight(range, h.color);
+            }
+        });
+        
+        // Áp dụng notes mới
+        Object.keys(notes).forEach(noteId => {
+            const noteData = notes[noteId];
+            // ... existing note application logic
+        });
+
+        // Áp dụng tất cả thay đổi trong một lần
+        ebookContentArea.appendChild(fragment);
+    });
+}
+
+// Sau đó gọi hàm này trong loadChapter:
+function loadChapter(chapterId, searchTerm = null) {
+    // ...existing code...
+    
+    // Thay thế 2 lời gọi riêng lẻ bằng một lời gọi tối ưu
+    // loadHighlightsForChapter(chapterId);
+    // loadNotesForChapter(chapterId);
+    loadHighlightsAndNotes();
+    
+    // ...rest of the code...
+}
             ebookContentArea.addEventListener('dblclick', function(event) {
                 if (event.target.closest('.highlighted-text, .glossary-term, button, a, input, textarea, .quiz-options')) {
                     return;
@@ -2215,6 +2298,49 @@
             searchInput.addEventListener('input', (e) => {
                 const searchTerm = e.target.value.trim();
                 if (currentChapterId) {
+                 // Thêm hàm này trước hàm loadChapter
+
+function showLoadingState() {
+    ebookContentArea.innerHTML = `
+        <div class="loading-state flex items-center justify-center p-8">
+            <i class="fas fa-spinner fa-spin fa-2x text-gold-accent"></i>
+            <span class="ml-3">Đang tải nội dung...</span>
+        </div>
+    `;
+}
+function getAdjacentChapters(currentChapterId) {
+    const chapters = ebookData.chapters;
+    const currentIndex = chapters.findIndex(c => c.id === currentChapterId);
+    return {
+        prev: currentIndex > 0 ? chapters[currentIndex - 1] : null,
+        next: currentIndex < chapters.length - 1 ? chapters[currentIndex + 1] : null
+    };
+}
+function loadChapter(chapterId, searchTerm = null) {
+    // Thêm loading state khi bắt đầu tải
+    showLoadingState();
+    
+    try {
+        const chapter = ebookData.chapters.find(c => c.id === chapterId);
+        if (!chapter) {
+            ebookContentArea.innerHTML = `<p class="text-red-500">Lỗi: Không tìm thấy chương.</p>`;
+            return;
+        }
+        // ...existing code...
+    } catch(error) {
+        console.error("Error loading chapter:", error);
+        ebookContentArea.innerHTML = `
+            <div class="error-state p-4 bg-red-50 rounded-lg">
+                <h3 class="text-red-600">Lỗi tải nội dung</h3>
+                <p>Đã xảy ra lỗi khi tải chương. Vui lòng thử lại.</p>
+            </div>
+        `;
+    }
+}   
+function loadChapter(chapterId, searchTerm = null) {
+    // ...existing code...
+    
+    let content = `${chapter.contentHTML}`;
                     loadChapter(currentChapterId, searchTerm); 
                 }
             });
@@ -2230,7 +2356,33 @@
              if (!currentChapterId && mainEbookTitleDesktop) { // Check if mainEbookTitleDesktop exists
                 mainEbookTitleDesktop.textContent = ebookData.meta.title;
             }
+const { prev, next } = getAdjacentChapters(chapterId);
+    content += `
+        <div class="navigation-buttons fixed bottom-4 left-0 right-0 flex justify-center space-x-4 p-4 md:static md:mt-8 bg-white bg-opacity-90 shadow-lg z-40">
+            ${prev ? `
+                <button onclick="loadChapter('${prev.id}')" 
+                    class="flex items-center px-4 py-2 bg-navy-primary text-white rounded-lg hover:bg-opacity-90">
+                    <i class="fas fa-arrow-left mr-2"></i>
+                    <span class="hidden sm:inline">${prev.title}</span>
+                    <span class="sm:hidden">Trước</span>
+                </button>
+            ` : ''}
+            
+            ${next ? `
+                <button onclick="loadChapter('${next.id}')" 
+                    class="flex items-center px-4 py-2 bg-navy-primary text-white rounded-lg hover:bg-opacity-90">
+                    <span class="hidden sm:inline">${next.title}</span>
+                    <span class="sm:hidden">Tiếp</span>
+                    <i class="fas fa-arrow-right ml-2"></i>
+                </button>
+            ` : ''}
+        </div>
+    `;
 
+    ebookContentArea.innerHTML = content;
+    
+    // ...rest of existing code...
+}
 
         });
     </script>
