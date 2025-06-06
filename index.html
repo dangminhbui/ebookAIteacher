@@ -18,7 +18,13 @@
             margin-top: 3rem;
             border-top: 1px solid #e5e7eb;
         }
-
+@media (max-width: 768px) {
+            #ask-gemini-btn {
+                bottom: 6.5rem; /* ~104px - Di chuyển nút Gemini lên cao hơn trên mobile */
+                right: 1.5rem;
+                transition: bottom 0.3s ease;
+            }
+        }
         .navigation-buttons button {
             transition: all 0.2s ease;
             display: flex;
@@ -601,7 +607,19 @@
             </form>
         </div>
     </div>
-
+<!-- === HTML MỚI CHO THÔNG BÁO THÀNH CÔNG === -->
+    <div id="success-modal" class="feedback-modal fixed inset-0 bg-black bg-opacity-70 hidden items-center justify-center z-[110] p-4">
+        <div class="bg-white p-8 md:p-12 rounded-xl shadow-2xl w-full max-w-md text-center flex flex-col items-center">
+            <div class="w-20 h-20 flex items-center justify-center bg-green-100 rounded-full mb-6">
+                <i class="fas fa-check fa-3x text-green-500"></i>
+            </div>
+            <h3 class="text-3xl font-bold text-navy-primary mb-3">Đăng ký thành công!</h3>
+            <p class="text-gray-600 mb-8 text-lg">Cảm ơn thầy cô. Chúng tôi sẽ liên hệ ngay để tư vấn chi tiết về khoá học.</p>
+            <button id="close-success-modal" class="action-button w-full max-w-xs py-3 text-base">
+                Tuyệt vời!
+            </button>
+        </div>
+    </div>
     <script>
         const ebookData = {
             meta: {
@@ -1478,6 +1496,8 @@
     const submitBtn = document.getElementById('submit-registration-btn');
     const submitBtnText = document.getElementById('submit-btn-text');
     const submitBtnSpinner = document.getElementById('submit-btn-spinner');
+    const successModal = document.getElementById('success-modal');
+    const closeSuccessModalBtn = document.getElementById('close-success-modal');
             const navigationMenu = document.getElementById('navigation-menu');
             const ebookContentArea = document.getElementById('ebook-content-area');
             const askGeminiBtn = document.getElementById('ask-gemini-btn');
@@ -2346,19 +2366,14 @@ function openRegistrationModal() {
                 }
             });
 
-            if (response.ok) {
-                formStatus.innerHTML = `<p class="success">Đã đăng ký thành công. Cảm ơn thầy cô, chúng tôi sẽ liên hệ ngay!</p>`;
-                registrationForm.reset();
-                setTimeout(closeRegistrationModal, 2000);
-            } else {
-                const responseData = await response.json();
-                if (Object.hasOwn(responseData, 'errors')) {
-                    const errorMsg = responseData["errors"].map(error => error["message"]).join(", ");
-                    formStatus.innerHTML = `<p class="error">Lỗi: ${errorMsg}</p>`;
-                } else {
-                    formStatus.innerHTML = `<p class="error">Đã xảy ra lỗi khi gửi. Vui lòng thử lại.</p>`;
-                }
-            }
+            // --- BẮT ĐẦU ĐOẠN MÃ THAY THẾ ---
+if (response.ok) {
+    closeRegistrationModal(); // Đóng form đăng ký
+    // Hiển thị popup thành công
+    successModal.classList.remove('hidden');
+    successModal.classList.add('flex');
+}
+// --- KẾT THÚC ĐOẠN MÃ THAY THẾ ---
         } catch (error) {
             formStatus.innerHTML = `<p class="error">Đã xảy ra lỗi khi gửi. Vui lòng thử lại.</p>`;
         } finally {
