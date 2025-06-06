@@ -514,11 +514,6 @@
             </div>
         </main>
     </div>
-
-    <button id="ask-gemini-btn" title="Hỏi AI Gemini" class="fixed bottom-6 right-6 md:bottom-8 md:right-8 bg-gold-accent text-navy-primary p-4 rounded-full shadow-xl hover:bg-yellow-400 transition-all duration-200 ease-in-out transform hover:scale-110 z-[60]">
-        <i class="fas fa-robot fa-lg"></i> <span class="ml-2 hidden md:inline font-semibold">Hỏi Gemini</span>
-    </button>
-
     <div id="gemini-modal" class="fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-center z-[100] p-4">
         <div class="bg-white p-6 md:p-8 rounded-xl shadow-2xl w-full md:w-3/5 lg:w-1/2 max-h-[90vh] flex flex-col modal-content-scrollable">
             <div class="flex justify-between items-center mb-6">
@@ -575,6 +570,11 @@
             </button>
         </div>
     </div>
+    <!-- === NÚT MESSENGER MỚI THAY THẾ CHO NÚT GEMINI === -->
+    <a href="https://m.me/Pademy2023" target="_blank" rel="noopener noreferrer" title="Chat qua Messenger" 
+       class="fixed bottom-6 right-6 md:bottom-8 md:right-8 bg-blue-600 text-white p-4 rounded-full shadow-xl hover:bg-blue-700 transition-all duration-200 ease-in-out transform hover:scale-110 z-[60]">
+        <i class="fab fa-facebook-messenger fa-2x"></i>
+    </a>
 <!-- === HTML CHO FORM ĐĂNG KÝ === -->
     <div id="registration-modal" class="feedback-modal fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-center z-[100] p-4">
         <div class="bg-white p-6 md:p-8 rounded-xl shadow-2xl w-full md:w-3/5 lg:w-1/2 max-w-lg max-h-[90vh] flex flex-col">
@@ -1067,12 +1067,7 @@
                                 <p class="mt-2"><em>(Lưu ý: Thay X, Y, Z bằng thông tin cụ thể.)</em></p>
                             </div>
                         </div>
-                        
-                        <div class="interactive-box mt-8">
-                            <h4 class="text-lg font-semibold text-navy-primary mb-3"><i class="fas fa-rocket mr-2 text-gold-accent"></i>Thử Tài Viết Prompt Của Bạn!</h4>
-                            <p class="mb-3">Bây giờ, hãy thử áp dụng những gì đã học. Đặt một yêu cầu liên quan đến công việc giảng dạy của bạn cho AI Gemini. Hãy cố gắng viết một prompt thật chi tiết và hiệu quả nhé!</p>
-                            <button id="trigger-gemini-from-ch4" class="action-button"><i class="fas fa-robot"></i>Hỏi Gemini Ngay</button>
-                        </div>
+                    
                         <!-- Gợi ý video YouTube: "hướng dẫn viết prompt hiệu quả cho ChatGPT" hoặc "prompt engineering cho giáo viên" -->
                     `,
                     summary: [ /* ... */ ]
@@ -1611,7 +1606,7 @@
                 sidebarOverlay.classList.remove('active');
                 mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>';
             });
-
+            
 function getAdjacentChapters(currentChapterId) {
             const chapters = ebookData.chapters;
             const currentIndex = chapters.findIndex(c => c.id === currentChapterId);
