@@ -1502,6 +1502,10 @@
     const submitBtnText = document.getElementById('submit-btn-text');
     const submitBtnSpinner = document.getElementById('submit-btn-spinner');
     const successModal = document.getElementById('success-modal');
+    // Gán sự kiện click cho nút đóng form đăng ký
+if(closeRegistrationModalBtn) {
+    closeRegistrationModalBtn.addEventListener('click', closeRegistrationModal);
+}
     const closeSuccessModalBtn = document.getElementById('close-success-modal');
             const navigationMenu = document.getElementById('navigation-menu');
             const ebookContentArea = document.getElementById('ebook-content-area');
@@ -2359,7 +2363,6 @@ function openRegistrationModal() {
         submitBtnText.textContent = "Đang gửi...";
         submitBtnSpinner.classList.remove('hidden');
         formStatus.innerHTML = '';
-
         const data = new FormData(event.target);
         try {
             // !!! QUAN TRỌNG: THAY THẾ BẰNG URL FORMSPREE CỦA BẠN !!!
