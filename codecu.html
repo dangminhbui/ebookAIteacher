@@ -9,76 +9,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Styles cho nút chuyển trang */
-        .navigation-buttons {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 1.5rem;
-            margin-top: 3rem;
-            border-top: 1px solid #e5e7eb;
-        }
-@media (max-width: 768px) {
-            #ask-gemini-btn {
-                bottom: 6.5rem; /* ~104px - Di chuyển nút Gemini lên cao hơn trên mobile */
-                right: 1.5rem;
-                transition: bottom 0.3s ease;
-            }
-        }
-        .navigation-buttons button {
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            padding: 0.8rem 1.6rem;
-            font-size: 1rem;
-            background-color: var(--gold-accent); /* Màu vàng */
-            color: var(--navy-primary); /* Chữ màu xanh đậm */
-            border-radius: 0.5rem;
-            font-weight: 700;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(0,0,0,0.05);
-        }
-
-        .navigation-buttons button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-            background-color: #eab308; /* Màu vàng sẫm hơn khi di chuột */
-        }
-
-        @media (max-width: 768px) {
-            #main-content {
-                /* Thêm khoảng đệm cuối trang để không bị nút che */
-                padding-bottom: 120px; 
-            }
-            .navigation-buttons {
-                position: fixed;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                margin-top: 0;
-                padding: 1rem;
-                z-index: 40;
-                background: var(--bg-white);
-                border-top: 1px solid #e5e7eb;
-                box-shadow: 0 -4px 10px rgba(0,0,0,0.05);
-            }
-             .navigation-buttons button {
-                 padding: 0.75rem 1rem;
-            }
-            /* === THÊM ĐOẠN MÃ MỚI VÀO ĐÂY === */
-    #messenger-fab {
-        bottom: 5rem; /* Di chuyển nút lên cao hơn (khoảng 80px) */
-    }
-    /* === KẾT THÚC ĐOẠN MÃ MỚI === */
-}
-        
             --navy-primary: #0A2342;
             --gold-accent: #FBC02D;
             --text-main: #333333;
             --bg-light: #f8f9fa;
             --bg-white: #FFFFFF;
         }
-
         body {
             font-family: 'Inter', sans-serif;
             color: var(--text-main);
@@ -86,14 +22,12 @@
             background-color: var(--bg-light);
             overflow-x: hidden; 
         }
-
         .bg-navy-primary { background-color: var(--navy-primary); }
         .text-navy-primary { color: var(--navy-primary); }
         .border-navy-primary { border-color: var(--navy-primary); }
         .bg-gold-accent { background-color: var(--gold-accent); }
         .text-gold-accent { color: var(--gold-accent); }
         .border-gold-accent { border-color: var(--gold-accent); }
-
         #sidebar {
             scrollbar-width: thin;
             scrollbar-color: var(--gold-accent) var(--navy-primary);
@@ -111,7 +45,6 @@
                 width: 320px; 
             }
         }
-
         #sidebar.open {
             transform: translateX(0);
         }
@@ -121,7 +54,6 @@
                 position:sticky; 
             }
         }
-
         #sidebar::-webkit-scrollbar { width: 8px; }
         #sidebar::-webkit-scrollbar-track { background: var(--navy-primary); }
         #sidebar::-webkit-scrollbar-thumb {
@@ -164,8 +96,6 @@
         }
         .author-info-content p { margin-bottom: 0.3rem; }
         .author-info-content i { margin-right: 0.5rem; color: var(--gold-accent); }
-
-
         #main-content-wrapper {
             transition: margin-left 0.3s ease-in-out;
             width: 100%; 
@@ -184,13 +114,12 @@
         #sidebar-overlay.active {
             display: block;
         }
-
         #ebook-content-area {
             max-width: 1000px; 
             margin-left: auto;
             margin-right: auto;
             padding-left: 1.5rem; 
-            
+            padding-right: 1.5rem;
         }
         
         .main-header {
@@ -213,8 +142,6 @@
                 height: 56px; /* md:h-14 */
             }
         }
-
-
         #ebook-content-area h1, #ebook-content-area h2, #ebook-content-area h3, #ebook-content-area h4 {
             color: var(--navy-primary);
             margin-top: 1.75em;
@@ -278,8 +205,6 @@
             width: 100%;
             height: 100%;
         }
-
-
         .quiz-question {
             background-color: #f9fafb;
             padding: 1.5rem;
@@ -351,8 +276,6 @@
             border-radius: 0.5rem;
         }
         .interactive-box h4 { margin-top: 0; color: #1E40AF; }
-
-
         .highlighted-text {
             background-color: rgba(251, 192, 45, 0.5);
             cursor: pointer;
@@ -389,7 +312,6 @@
         .glossary-term:hover {
             background-color: rgba(251, 192, 45, 0.15);
         }
-
         .modal-content-scrollable::-webkit-scrollbar {
             width: 6px;
         }
@@ -404,7 +326,6 @@
         .modal-content-scrollable::-webkit-scrollbar-thumb:hover {
             background: #aaa;
         }
-
         #ebook-content-area table {
             width: 100%;
             border-collapse: collapse;
@@ -427,7 +348,6 @@
         #ebook-content-area tr:hover {
             background-color: #eff6ff;
         }
-
         .action-button {
             background-color: var(--gold-accent);
             color: var(--navy-primary);
@@ -445,7 +365,6 @@
         .action-button i {
             margin-right: 0.5rem;
         }
-
         #search-input {
             border: 2px solid var(--gold-accent);
             transition: box-shadow 0.2s;
@@ -471,12 +390,9 @@
             padding: 0.1em 0.2em;
             border-radius: 0.2em;
         }
-
-
     </style>
 </head>
 <body class="font-inter flex min-h-screen relative">
-
     <!-- Sidebar -->
     <aside id="sidebar" class="text-white p-6 overflow-y-auto shadow-2xl transition-transform duration-300 ease-in-out">
         <div class="mb-8 text-center">
@@ -496,7 +412,6 @@
     </aside>
     
     <div id="sidebar-overlay"></div>
-
     <div id="main-content-wrapper">
         <main id="main-content" class="p-6 md:p-8 pt-2 md:pt-6 overflow-y-auto bg-white rounded-tl-lg shadow-inner min-h-screen">
             <!-- Main Header with Logo -->
@@ -520,6 +435,9 @@
             </div>
         </main>
     </div>
+    <button id="ask-gemini-btn" title="Hỏi AI Gemini" class="fixed bottom-6 right-6 md:bottom-8 md:right-8 bg-gold-accent text-navy-primary p-4 rounded-full shadow-xl hover:bg-yellow-400 transition-all duration-200 ease-in-out transform hover:scale-110 z-[60]">
+        <i class="fas fa-robot fa-lg"></i> <span class="ml-2 hidden md:inline font-semibold">Hỏi Gemini</span>
+    </button>
     <div id="gemini-modal" class="fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-center z-[100] p-4">
         <div class="bg-white p-6 md:p-8 rounded-xl shadow-2xl w-full md:w-3/5 lg:w-1/2 max-h-[90vh] flex flex-col modal-content-scrollable">
             <div class="flex justify-between items-center mb-6">
@@ -539,7 +457,6 @@
             </div>
         </div>
     </div>
-
     <div id="notes-modal" class="fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-center z-[100] p-4">
         <div class="bg-white p-6 rounded-xl shadow-2xl w-full md:w-2/5 lg:w-1/3">
             <div class="flex justify-between items-center mb-4">
@@ -553,7 +470,6 @@
             </div>
         </div>
     </div>
-
     <div id="glossary-modal" class="fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-center z-[100] p-4">
         <div class="bg-white p-6 rounded-xl shadow-2xl w-full md:w-2/5 lg:w-1/3 max-h-[80vh] overflow-y-auto modal-content-scrollable">
             <div class="flex justify-between items-center mb-4">
@@ -573,56 +489,6 @@
             <button class="w-6 h-6 rounded-full bg-purple-300 hover:ring-2 ring-offset-1 ring-purple-400" data-color="rgba(196, 181, 253, 0.5)"></button>
             <button id="remove-highlight-btn" class="w-6 h-6 rounded-full bg-gray-300 hover:ring-2 ring-offset-1 ring-gray-400 flex items-center justify-center text-red-600" title="Xóa highlight">
                 <i class="fas fa-times"></i>
-            </button>
-        </div>
-    </div>
-    <!-- === NÚT MESSENGER MỚI THAY THẾ CHO NÚT GEMINI === -->
-    <a id="messenger-fab" href="https://m.me/Pademy2023" target="_blank" rel="noopener noreferrer" title="Chat qua Messenger" 
-       class="fixed bottom-6 right-6 md:bottom-8 md:right-8 bg-blue-600 text-white p-4 rounded-full shadow-xl hover:bg-blue-700 transition-all duration-200 ease-in-out transform hover:scale-110 z-[60]">
-        <i class="fab fa-facebook-messenger fa-2x"></i>
-    </a>
-<!-- === HTML CHO FORM ĐĂNG KÝ === -->
-    <div id="registration-modal" class="feedback-modal fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-center z-[100] p-4">
-        <div class="bg-white p-6 md:p-8 rounded-xl shadow-2xl w-full md:w-3/5 lg:w-1/2 max-w-lg max-h-[90vh] flex flex-col">
-            <div class="flex justify-between items-center mb-6">
-                <h3 class="text-2xl font-semibold text-navy-primary">Đăng ký khoá học AI chuyên sâu</h3>
-                <button id="close-registration-modal" class="text-gray-500 hover:text-gray-800 text-3xl">&times;</button>
-            </div>
-            <form id="registration-form" class="space-y-4">
-                <div>
-                    <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Họ và tên</label>
-                    <input type="text" id="name" name="name" required class="w-full p-3 border border-gray-300 rounded-lg">
-                </div>
-                <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                    <input type="email" id="email" name="email" required class="w-full p-3 border border-gray-300 rounded-lg">
-                </div>
-                 <div>
-                    <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Số điện thoại</label>
-                    <input type="tel" id="phone" name="phone" required class="w-full p-3 border border-gray-300 rounded-lg">
-                </div>
-                <div>
-                    <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Ghi chú (nếu có)</label>
-                    <textarea id="message" name="message" rows="3" class="w-full p-3 border border-gray-300 rounded-lg resize-y"></textarea>
-                </div>
-                <div id="form-status" class="mt-4"></div>
-                <button type="submit" id="submit-registration-btn" class="w-full bg-navy-primary text-white py-3 px-4 rounded-lg hover:bg-opacity-90 transition-colors font-semibold flex items-center justify-center">
-                    <span id="submit-btn-text">Gửi Đăng Ký</span>
-                    <i id="submit-btn-spinner" class="fas fa-spinner fa-spin ml-2 hidden"></i>
-                </button>
-            </form>
-        </div>
-    </div>
-<!-- === HTML MỚI CHO THÔNG BÁO THÀNH CÔNG === -->
-    <div id="success-modal" class="feedback-modal fixed inset-0 bg-black bg-opacity-70 hidden items-center justify-center z-[110] p-4">
-        <div class="bg-white p-8 md:p-12 rounded-xl shadow-2xl w-full max-w-md text-center flex flex-col items-center">
-            <div class="w-20 h-20 flex items-center justify-center bg-green-100 rounded-full mb-6">
-                <i class="fas fa-check fa-3x text-green-500"></i>
-            </div>
-            <h3 class="text-3xl font-bold text-navy-primary mb-3">Đăng ký thành công!</h3>
-            <p class="text-gray-600 mb-8 text-lg">Cảm ơn thầy cô. Chúng tôi sẽ liên hệ ngay để tư vấn chi tiết về khoá học.</p>
-            <button id="close-success-modal" class="action-button w-full max-w-xs py-3 text-base">
-                Tuyệt vời!
             </button>
         </div>
     </div>
@@ -652,7 +518,6 @@
                             <li><i class="fas fa-phone text-gold-accent"></i> Điện thoại: 0918888691</li>
                             <li><i class="fas fa-envelope text-gold-accent"></i> Email: pademy.vn@gmail.com</li>
                         </ul>
-
                         <h3 class="text-xl font-semibold text-navy-primary mt-6 mb-3">Mục đích của ebook:</h3>
                         <p>Ebook này được biên soạn nhằm mục đích cung cấp những kiến thức nền tảng và ứng dụng thực tiễn nhất của Trí tuệ Nhân tạo (AI) cho các nhà giáo dục. Chúng tôi mong muốn giúp thầy cô tự tin hơn trong việc tìm hiểu, tiếp cận và từng bước ứng dụng AI vào công việc giảng dạy, quản lý lớp học và phát triển chuyên môn, từ đó nâng cao chất lượng giáo dục và khơi gợi tiềm năng của học sinh trong kỷ nguyên số.</p>
                         
@@ -663,7 +528,6 @@
                             <li>Bất kỳ ai quan tâm đến việc ứng dụng AI để đổi mới dạy và học.</li>
                             <li>Đặc biệt hữu ích cho những người mới bắt đầu tìm hiểu về AI.</li>
                         </ul>
-
                         <h3 class="text-xl font-semibold text-navy-primary mt-6 mb-3">Những kiến thức và kỹ năng cốt lõi bạn sẽ nhận được:</h3>
                         <ul class="list-disc pl-6 mb-4 space-y-1">
                             <li>Hiểu rõ khái niệm <span class="glossary-term" data-term="AI">AI</span> là gì, các thuật ngữ liên quan và lịch sử phát triển của AI.</li>
@@ -674,7 +538,6 @@
                             <li>Nhận diện cơ hội, thách thức và các vấn đề đạo đức khi ứng dụng AI trong giáo dục.</li>
                             <li>Có khả năng tự thực hành một số quy trình ứng dụng AI cơ bản.</li>
                         </ul>
-
                         <blockquote class="mt-8 mb-8 p-6 bg-yellow-50 border-l-4 border-gold-accent text-yellow-800 italic rounded-r-lg">
                             <p class="font-semibold text-lg">Thông điệp truyền cảm hứng:</p>
                             <p>"Kỷ nguyên AI đã đến, mang theo vô vàn cơ hội để chúng ta đổi mới và nâng tầm giáo dục. Ebook này sẽ là người bạn đồng hành, giúp thầy cô không chỉ hiểu về AI mà còn biết cách biến AI thành trợ thủ đắc lực, cùng kiến tạo tương lai học tập sáng tạo và hiệu quả hơn cho thế hệ học trò."</p>
@@ -707,7 +570,6 @@
                                 ].map(obj => `<li>${obj}</li>`).join('')
                             }
                         </ul>
-
                         <h4>1.1. AI Không Còn Xa Lạ</h4>
                         <p>Thầy cô có để ý rằng mỗi khi lướt Facebook, những nội dung hiện ra dường như 'đọc vị' được sở thích của mình? Hay khi tìm kiếm trên Google, kết quả lại vô cùng liên quan? Đó chính là những ví dụ gần gũi về AI đang hiện diện xung quanh chúng ta. Từ trợ lý ảo trên điện thoại (Siri, Google Assistant), gợi ý phim trên Netflix, đến cả những chiếc xe tự lái đang được thử nghiệm, AI đang dần thay đổi cách chúng ta sống, làm việc và học tập.</p>
                         <div class="image-container">
@@ -715,11 +577,9 @@
                             <img src="https://i.postimg.cc/pTj3z03v/ng-d-ng-ai-trong-i-s-ng.png" alt="Collage ứng dụng AI quen thuộc">
                             <p class="image-caption">Minh họa các ứng dụng AI trong đời sống.</p>
                         </div>
-
                         <h4>1.2. Vậy, AI Là Gì? (Định Nghĩa Đơn Giản Cho Nhà Giáo Dục)</h4>
                         <p>Hiểu một cách đơn giản, <strong class="glossary-term" data-term="AI">Trí tuệ Nhân tạo (Artificial Intelligence - AI)</strong> là lĩnh vực khoa học máy tính tập trung vào việc tạo ra các hệ thống máy móc có khả năng thực hiện những tác vụ mà thông thường đòi hỏi trí tuệ của con người. Những khả năng đó bao gồm học hỏi, giải quyết vấn đề, nhận dạng mẫu, hiểu ngôn ngữ tự nhiên và đưa ra quyết định.</p>
                         <p>Đối với thầy cô, AI không phải là một 'pháp thuật' cao siêu, mà là một công cụ mạnh mẽ, một 'người trợ lý thông minh' có thể hỗ trợ đắc lực trong nhiều hoạt động sư phạm.</p>
-
                         <h4>1.3. "Họ Hàng" Nhà AI: Học Máy và Học Sâu</h4>
                         <p>Trong gia đình AI rộng lớn, có hai 'người con' nổi bật là <strong class="glossary-term" data-term="Machine Learning">Học Máy (Machine Learning - ML)</strong> và <strong class="glossary-term" data-term="Deep Learning">Học Sâu (Deep Learning - DL)</strong>.</p>
                         <ul class="list-none pl-0 space-y-4">
@@ -741,7 +601,6 @@
                             </li>
                         </ul>
                         <p>Thầy cô không nhất thiết phải hiểu sâu về kỹ thuật, nhưng việc biết tên và vai trò của chúng sẽ giúp thầy cô tự tin hơn khi tìm hiểu các ứng dụng AI.</p>
-
                         <h4>1.4. Hành Trình Kỳ Diệu Của AI (Lịch Sử Phát Triển Tóm Tắt)</h4>
                         <p>Ý tưởng về máy móc thông minh đã có từ rất lâu, nhưng AI thực sự bắt đầu hình thành từ giữa thế kỷ 20.</p>
                         <ul class="list-disc pl-6 space-y-1">
@@ -755,7 +614,6 @@
                            <img src="https://i.postimg.cc/wBzH47sK/Screenshot-2025-06-05-112414.png" alt="Timeline lịch sử AI">
                            <p class="image-caption">Timeline trực quan các cột mốc chính của AI.</p>
                         </div>
-
                         <h4>1.5. Tại Sao Giáo Viên Cần "Kết Bạn" Với AI?</h4>
                         <ul class="list-disc pl-6 space-y-1">
                             <li><strong>Nâng cao hiệu quả công việc:</strong> Giảm tải các công việc lặp đi lặp lại, có thêm thời gian cho chuyên môn và tương tác với học sinh.</li>
@@ -801,11 +659,9 @@
                                 ].map(obj => `<li>${obj}</li>`).join('')
                             }
                         </ul>
-
                         <h4>2.1. Dữ Liệu: "Thức Ăn" Không Thể Thiếu Của AI</h4>
                         <p>Nếu AI là một 'bộ não' thông minh, thì <strong class="glossary-term" data-term="Data">dữ liệu</strong> chính là 'thức ăn' nuôi dưỡng bộ não đó. Không có dữ liệu, AI không thể học hỏi, không thể đưa ra dự đoán hay quyết định chính xác. Lượng dữ liệu càng lớn và chất lượng càng cao, AI càng có khả năng trở nên 'thông minh' hơn.</p>
                         <p>Hãy tưởng tượng thầy cô dạy học sinh về các loài động vật. Thầy cô cần cho các em xem nhiều hình ảnh, video, đọc các mô tả (đó chính là dữ liệu) để các em có thể nhận biết và phân biệt được chúng. AI cũng học theo cách tương tự.</p>
-
                         <h4>2.2. AI "Thích Ăn" Gì? Các Dạng Dữ Liệu Phổ Biến</h4>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
                             <div class="p-4 bg-gray-50 rounded-lg border">
@@ -845,7 +701,6 @@
                             <img src="https://i.postimg.cc/k5TZN4Qv/visual-selection.png" alt="Sơ đồ GIGO">
                             <p class="image-caption">Sơ đồ minh họa GIGO: Dữ liệu xấu -> AI -> Kết quả xấu.</p>
                         </div>
-
                         <h4>2.4. Nguồn Dữ Liệu Cho AI Trong Giáo Dục</h4>
                         <ul class="list-disc pl-6 space-y-1">
                             <li><strong>Dữ liệu học tập của học sinh:</strong> Kết quả bài kiểm tra, bài tập về nhà, hồ sơ học tập, tương tác trên hệ thống LMS. <em>(Lưu ý: Cần tuân thủ các quy định về <span class="glossary-term" data-term="Data Privacy">quyền riêng tư</span> và bảo mật dữ liệu).</em></li>
@@ -872,7 +727,6 @@
                             </table>
                             <p class="mt-4 text-sm text-gray-600">Trong một ebook tương tác thực sự, đây có thể là một hoạt động kéo thả. Hiện tại, hãy tự kiểm tra sự hiểu biết của bạn.</p>
                         </div>
-
                         <div class="interactive-box mt-8">
                              <h4 class="text-lg font-semibold text-navy-primary mb-3"><i class="fas fa-question-circle mr-2 text-gold-accent"></i>Quiz: Chất Lượng Dữ Liệu</h4>
                              <div id="quiz-chuong2"></div>
@@ -915,7 +769,6 @@
                             <p class="image-caption">Sơ đồ minh họa một lộ trình học tập cá nhân hóa.</p>
                         </div>
                         <p><strong>Thách thức:</strong> Cần lượng lớn dữ liệu học sinh, đảm bảo công bằng và tránh tạo ra sự phân hóa quá lớn.</p>
-
                         <h4>3.2. AI Hỗ Trợ Soạn Giáo Án, Bài Giảng, Slide</h4>
                         <p><strong>Mô tả:</strong> Các công cụ <span class="glossary-term" data-term="Generative AI">AI tạo sinh (Generative AI)</span> có thể giúp thầy cô tìm ý tưởng, tạo dàn ý, viết nội dung cơ bản, thậm chí thiết kế slide bài giảng một cách nhanh chóng.</p>
                         <p><strong>Lợi ích:</strong> Tiết kiệm thời gian chuẩn bị bài, giúp thầy cô tập trung hơn vào việc thiết kế các hoạt động sư phạm sáng tạo.</p>
@@ -926,7 +779,6 @@
                             <p class="image-caption">Ảnh chụp màn hình một công cụ AI đang tạo slide hoặc dàn ý giáo án.</p>
                         </div>
                         <p><strong>Thách thức:</strong> Cần kiểm tra kỹ lưỡng tính chính xác và sự phù hợp của nội dung do AI tạo ra, đảm bảo tính sư phạm.</p>
-
                         <h4>3.3. Tạo Câu Hỏi, Đề Thi Tự Động (Automated Question Generation)</h4>
                         <p><strong>Mô tả:</strong> AI có thể dựa trên một đoạn văn bản, một chủ đề hoặc một bộ tài liệu để tự động tạo ra các câu hỏi trắc nghiệm, câu hỏi tự luận ở nhiều cấp độ khác nhau.</p>
                         <p><strong>Lợi ích:</strong> Giúp thầy cô nhanh chóng có được ngân hàng câu hỏi đa dạng để ôn tập, kiểm tra.</p>
@@ -937,7 +789,6 @@
                             <p class="image-caption">Giao diện một công cụ AI đang tạo câu hỏi từ một đoạn văn bản.</p>
                         </div>
                         <p><strong>Thách thức:</strong> Chất lượng câu hỏi cần được kiểm duyệt, đôi khi AI có thể tạo câu hỏi không rõ ràng hoặc không phù hợp.</p>
-
                         <h4>3.4. Hệ Thống Chấm Bài và Phản Hồi Tự Động (Automated Grading & Feedback)</h4>
                         <p><strong>Mô tả:</strong> AI có thể hỗ trợ chấm các bài kiểm tra trắc nghiệm một cách nhanh chóng. Đối với bài tự luận, AI đang phát triển khả năng đưa ra những gợi ý, nhận xét ban đầu, giúp giáo viên tiết kiệm thời gian đọc và sửa chi tiết.</p>
                         <p><strong>Lợi ích:</strong> Giảm tải công việc chấm bài, giúp học sinh nhận được phản hồi nhanh hơn.</p>
@@ -948,7 +799,6 @@
                             <p class="image-caption">Minh họa AI đang chấm bài trắc nghiệm hoặc đưa ra nhận xét cho bài viết.</p>
                         </div>
                         <p><strong>Thách thức:</strong> Khả năng chấm bài tự luận của AI vẫn còn hạn chế, chưa thể thay thế hoàn toàn sự đánh giá sâu sắc của con người, đặc biệt với các môn xã hội hoặc yêu cầu tư duy sáng tạo.</p>
-
                         <h4>3.5. Trợ Lý Ảo Thông Minh (Intelligent Tutoring Systems & Chatbots)</h4>
                         <p><strong>Mô tả:</strong> <span class="glossary-term" data-term="Chatbot">Chatbot AI</span> có thể trả lời các câu hỏi thường gặp của học sinh 24/7, cung cấp hướng dẫn, giải thích khái niệm, hoặc đóng vai trò như một người bạn đồng hành trong học tập.</p>
                         <p><strong>Lợi ích:</strong> Hỗ trợ học sinh ngoài giờ lên lớp, giải đáp thắc mắc kịp thời.</p>
@@ -970,7 +820,6 @@
                            <p class="image-caption">Biểu đồ trực quan hóa dữ liệu học tập do AI phân tích.</p>
                         </div>
                         <p><strong>Thách thức:</strong> Đảm bảo quyền riêng tư dữ liệu, diễn giải kết quả phân tích một cách chính xác và có ý nghĩa.</p>
-
                         <h4>3.7. AI Trong Việc Tạo Trò Chơi Tương Tác, Hoạt Động Lớp Học</h4>
                         <p><strong>Mô tả:</strong> AI có thể gợi ý ý tưởng, thậm chí hỗ trợ tạo ra các trò chơi giáo dục, câu đố tương tác, kịch bản hoạt động nhóm, làm phong phú thêm trải nghiệm học tập.</p>
                         <p><strong>Lợi ích:</strong> Tăng tính hấp dẫn, động lực học tập cho học sinh.</p>
@@ -981,7 +830,6 @@
                            <p class="image-caption">Giao diện một trò chơi giáo dục được tạo hoặc gợi ý bởi AI.</p>
                         </div>
                         <p><strong>Thách thức:</strong> Cần đảm bảo nội dung trò chơi phù hợp với mục tiêu bài học và lứa tuổi.</p>
-
                         <div class="interactive-box mt-8">
                             <h4 class="text-lg font-semibold text-navy-primary mb-3"><i class="fas fa-lightbulb mr-2 text-gold-accent"></i>Câu Hỏi Mở: "Bạn sẽ dùng AI cho việc gì đầu tiên?"</h4>
                             <p class="mb-2">Sau khi tìm hiểu các ứng dụng trên, thầy cô hãy thử suy nghĩ: Nếu được chọn một ứng dụng AI để áp dụng ngay vào công việc của mình, đó sẽ là gì và tại sao? Hãy chia sẻ ý tưởng của bạn!</p>
@@ -1024,7 +872,6 @@
                             <img src="https://i.postimg.cc/yx7xCDZS/Screenshot-2025-06-04-160055.png" alt="Minh họa prompt và AI">
                             <p class="image-caption">Prompt là cầu nối giao tiếp với AI.</p>
                         </div>
-
                         <h4>4.2. Giải Mã Công Thức PROMPT Cho Nhà Giáo Dục</h4>
                         <p>Dù không có một công thức 'bất bại' nào cho mọi tình huống, nhưng một cấu trúc prompt tốt thường bao gồm các yếu tố sau (viết tắt là <strong>PROMPT</strong>):</p>
                         <ul class="list-disc pl-6 space-y-2 my-4">
@@ -1036,7 +883,6 @@
                             <li><strong>T - Tone (Giọng điệu):</strong> Bạn muốn AI trả lời với giọng điệu như thế nào? <em>Ví dụ: Trang trọng, thân mật, hài hước...</em></li>
                         </ul>
                         <p>Không nhất thiết mọi prompt đều phải có đủ tất cả các yếu tố trên, nhưng càng cung cấp thông tin rõ ràng, AI càng dễ 'hiểu' và đáp ứng tốt hơn.</p>
-
                         <h4>4.3. Ví Dụ "Soi" Prompt - Tốt và Chưa Tốt</h4>
                         <p><strong>Tình huống:</strong> Soạn câu hỏi ôn tập về Chiến thắng Điện Biên Phủ cho học sinh lớp 9.</p>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
@@ -1058,7 +904,6 @@
                             <li>Đừng ngại thử nghiệm nhiều cách diễn đạt khác nhau cho cùng một yêu cầu.</li>
                             <li>Nếu kết quả chưa ưng ý, hãy 'phản biện' lại với AI, yêu cầu nó làm rõ hoặc sửa đổi. Ví dụ: "Câu trả lời này hơi khó hiểu, bạn có thể giải thích đơn giản hơn không?", "Hãy bổ sung thêm ví dụ cho ý này".</li>
                         </ul>
-
                         <div class="interactive-box mt-8">
                             <h4 class="text-lg font-semibold text-navy-primary mb-3"><i class="fas fa-edit mr-2 text-gold-accent"></i>Bài tập: "Sửa Prompt Lỗi"</h4>
                             <p class="mb-2">Dưới đây là một prompt chưa tốt. Hãy sử dụng công thức PROMPT để viết lại thành một prompt hiệu quả hơn trong ô bên dưới.</p>
@@ -1073,7 +918,12 @@
                                 <p class="mt-2"><em>(Lưu ý: Thay X, Y, Z bằng thông tin cụ thể.)</em></p>
                             </div>
                         </div>
-                    
+                        
+                        <div class="interactive-box mt-8">
+                            <h4 class="text-lg font-semibold text-navy-primary mb-3"><i class="fas fa-rocket mr-2 text-gold-accent"></i>Thử Tài Viết Prompt Của Bạn!</h4>
+                            <p class="mb-3">Bây giờ, hãy thử áp dụng những gì đã học. Đặt một yêu cầu liên quan đến công việc giảng dạy của bạn cho AI Gemini. Hãy cố gắng viết một prompt thật chi tiết và hiệu quả nhé!</p>
+                            <button id="trigger-gemini-from-ch4" class="action-button"><i class="fas fa-robot"></i>Hỏi Gemini Ngay</button>
+                        </div>
                         <!-- Gợi ý video YouTube: "hướng dẫn viết prompt hiệu quả cho ChatGPT" hoặc "prompt engineering cho giáo viên" -->
                     `,
                     summary: [ /* ... */ ]
@@ -1172,7 +1022,6 @@
                             <p><strong>Ví dụ ứng dụng:</strong> "Nhập prompt: 'Tạo video hoạt hình ngắn mô tả quá trình nảy mầm của hạt đậu' để có một video trực quan cho môn Sinh học."</p>
                         </div>
                         <!-- Gợi ý video YouTube: "cách tạo video bài giảng bằng AI [tên công cụ]" -->
-
                         <h4>5.4. Hướng Dẫn Sử Dụng Cơ Bản (Chung cho các công cụ)</h4>
                         <ol class="list-decimal pl-6 space-y-1">
                             <li>Truy cập website của công cụ.</li>
@@ -1182,7 +1031,6 @@
                             <li>Tham khảo các hướng dẫn, ví dụ có sẵn trên trang của công cụ.</li>
                         </ol>
                         <blockquote><p>"Đừng ngại 'vọc vạch' và thử nghiệm, đó là cách học nhanh nhất!"</p></blockquote>
-
                         <div class="interactive-box mt-8">
                             <h4 class="text-lg font-semibold text-navy-primary mb-3"><i class="fas fa-mouse-pointer mr-2 text-gold-accent"></i>Hoạt động: "Bạn Sẽ Chọn Trợ Thủ Nào?"</h4>
                             <p class="mb-2">Dựa trên nhu cầu công việc hiện tại của thầy cô, hãy chọn ra 1-2 công cụ AI trong danh sách trên mà thầy cô muốn tìm hiểu sâu hơn. Hãy giải thích lý do lựa chọn của mình.</p>
@@ -1223,7 +1071,6 @@
                             }
                         </ul>
                         <p>AI không chỉ là một công cụ công nghệ, nó còn mang đến những thay đổi sâu sắc cho cách chúng ta dạy và học. Bên cạnh những cơ hội to lớn, chúng ta cũng cần nhận diện và đối mặt với những thách thức và trách nhiệm đi kèm.</p>
-
                         <h4>6.1. Cơ Hội Vàng Cho Đổi Mới Giáo Dục</h4>
                         <ul class="list-disc pl-6 space-y-1">
                             <li><strong>Nâng cao chất lượng giảng dạy:</strong> Cá nhân hóa học tập, cung cấp tài liệu đa dạng, giải phóng giáo viên khỏi các tác vụ thủ công.</li>
@@ -1236,7 +1083,6 @@
                            <img src="https://i.postimg.cc/52bYWk8R/images.jpg" alt="Cơ hội AI trong giáo dục">
                            <p class="image-caption">Một hình ảnh biểu tượng cho sự phát triển, đổi mới trong giáo dục nhờ AI.</p>
                         </div>
-
                         <h4>6.2. Những "Góc Khuất" Cần Lưu Tâm - Thách Thức và Vấn Đề Đạo Đức</h4>
                         <div class="space-y-4">
                             <div>
@@ -1267,7 +1113,6 @@
                            <p class="image-caption">Một hình ảnh ẩn dụ về các "góc khuất" hoặc thách thức của AI.</p>
                         </div>
                         <!-- Gợi ý video YouTube: "đạo đức AI trong giáo dục" hoặc "thách thức khi ứng dụng AI vào trường học" -->
-
                         <h4>6.3. Vai Trò Của Nhà Giáo Dục Trong Kỷ Nguyên AI</h4>
                         <ul class="list-disc pl-6 space-y-1">
                             <li>Không chỉ là người truyền thụ kiến thức: Mà còn là người hướng dẫn, cố vấn, người khơi gợi sự tò mò và kỹ năng học tập suốt đời.</li>
@@ -1275,7 +1120,6 @@
                             <li>Người thúc đẩy tư duy phản biện về AI: Giúp học sinh hiểu cách AI hoạt động, nhận diện thiên kiến, và sử dụng AI một cách có ý thức.</li>
                             <li>Người tiên phong trong đổi mới sáng tạo: Chủ động tìm tòi, thử nghiệm các phương pháp dạy học mới với sự hỗ trợ của AI.</li>
                         </ul>
-
                         <h4>6.4. Dạy Học Sinh "Chơi" Cùng AI Một Cách Thông Minh</h4>
                         <ul class="list-disc pl-6 space-y-1">
                             <li>Hướng dẫn về tính xác thực của thông tin: "Không phải mọi thứ AI nói đều đúng. Hãy dạy các em cách kiểm tra chéo thông tin từ nhiều nguồn."</li>
@@ -1327,7 +1171,6 @@
                             }
                         </ul>
                         <p>Chương này sẽ tập trung vào việc hướng dẫn các quy trình thực hành cụ thể, giúp thầy cô tự tay tạo ra các sản phẩm giáo dục với sự hỗ trợ của AI.</p>
-
                         <h4>7.1. Dự Án 1: Quy Trình Soạn Giáo Án Slide Siêu Tốc Với AI</h4>
                         <p><strong>Mục tiêu dự án:</strong> Tạo một bộ slide bài giảng cơ bản cho một chủ đề tự chọn bằng cách kết hợp NotebookLM (hoặc công cụ tương tự để quản lý tài liệu) và các AI tạo slide (Gamma, ChatGPT...).</p>
                         <p><strong>Các bước thực hiện:</strong></p>
@@ -1362,7 +1205,6 @@
                             <p>"Hãy thử áp dụng quy trình này để tạo slide cho một bài học bạn sắp dạy!"</p>
                         </div>
                         <!-- Gợi ý video YouTube: "hướng dẫn dùng NotebookLM và Gamma.app soạn giáo án" -->
-
                         <h4>7.2. Dự Án 2: Từ Trang Sách Tĩnh Đến Video Bài Giảng Sinh Động</h4>
                         <p><strong>Mục tiêu dự án:</strong> Tạo một video ngắn giải thích một khái niệm hoặc tóm tắt một bài học từ hình ảnh sách giáo khoa.</p>
                         <p><strong>Các bước thực hiện (chi tiết hóa 9 bước bạn đã cung cấp):</strong></p>
@@ -1383,7 +1225,6 @@
                             <p class="image-caption">Sơ đồ trực quan hóa quy trình tạo video từ ảnh SGK.</p>
                         </div>
                         <!-- Gợi ý video YouTube: "cách làm video bài giảng từ ảnh bằng AI Kling" hoặc "tạo video giáo dục với AI" -->
-
                         <h4>7.3. Dự Án 3: "Gamify" Lớp Học - Tạo Trò Chơi Tương Tác Với AI</h4>
                         <p><strong>Mục tiêu dự án:</strong> Tạo một trò chơi giáo dục đơn giản (ví dụ: ô chữ, trắc nghiệm tương tác) bằng Canva AI hoặc các công cụ tương tự.</p>
                         <p><strong>Các bước thực hiện (chi tiết hóa 7 bước bạn đã cung cấp):</strong></p>
@@ -1396,17 +1237,19 @@
                             <li>Nếu làm game trắc nghiệm có nhiều slide, sao chép slide để tạo các trang câu hỏi và trang đáp án/giải thích. Sử dụng tính năng "Liên kết" của Canva để nối các nút bấm (ví dụ: nút "Đáp án A") đến đúng trang phản hồi.</li>
                             <li>Kiểm tra kỹ các liên kết và tính logic của trò chơi. Chia sẻ dưới dạng "Đường liên kết chỉ xem" hoặc tải về dưới dạng PDF tương tác (nếu hỗ trợ).</li>
                         </ol>
-                         <div class="video-container my-3">
-    <iframe 
-        src="https://www.youtube.com/embed/rKm4cMkEikQ" 
-        title="Hướng dẫn tạo game tương tác bằng Canva AI" 
-        frameborder="0" 
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-        allowfullscreen>
-    </iframe>
-</div
+                         <div class="image-container my-2">
+                            <!-- Gợi ý tìm kiếm hình ảnh: "giao diện Canva tạo game giáo dục AI" -->
+                            <img src="https://placehold.co/500x300/0A2342/FBC02D?text=Canva+AI+Tạo+Game" alt="Canva AI tạo game">
+                            <p class="image-caption">Giao diện Canva AI đang tạo một trò chơi đơn giản.</p>
+                        </div>
                         <!-- Gợi ý video YouTube: "hướng dẫn tạo game tương tác bằng Canva AI" -->
-                        
+                        <iframe 
+                                src="https://www.youtube.com/embed/rKm4cMkEikQ" 
+                                title="Hướng dẫn tạo game tương tác bằng Canva AI" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                            </iframe>
                         <div class="interactive-box mt-8">
                             <h4 class="text-lg font-semibold text-navy-primary mb-3"><i class="fas fa-clipboard-list mr-2 text-gold-accent"></i>Checklist Thực Hiện Dự Án</h4>
                             <ul class="list-none pl-0 space-y-1">
@@ -1431,32 +1274,44 @@
                         "Đừng ngại thử nghiệm và tùy chỉnh các quy trình cho phù hợp với nhu cầu của bản thân."
                     ]
                 },
-                {
+                { 
                     id: "loiKet",
                     title: "Lời Kết",
                     group: "Tổng kết",
                     contentHTML: `
                         <p>Hành trình khám phá thế giới AI dành cho nhà giáo dục của chúng ta đến đây là tạm kết thúc, nhưng cánh cửa học hỏi và ứng dụng AI vẫn luôn rộng mở. Ebook này đã cung cấp cho thầy cô những kiến thức nền tảng, những công cụ hữu ích và những quy trình thực tiễn để bắt đầu.</p>
-
-<div class="flex flex-col md:flex-row justify-center gap-4 my-8">
-    <a href="https://www.facebook.com/groups/605880898519238" target="_blank" rel="noopener noreferrer" 
-        class="flex items-center justify-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all">
-        <i class="fab fa-facebook-square mr-2 text-xl"></i>
-        Tham gia cộng đồng Facebook
-    </a>
-    
-    <a href="https://www.youtube.com/@DangMinhBui111" target="_blank" rel="noopener noreferrer"
-        class="flex items-center justify-center px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-all">
-        <i class="fab fa-youtube mr-2 text-xl"></i>
-        Theo dõi kênh YouTube
-    </a>
-</div>
-
-<div class="interactive-box mt-10 text-center">
-    <h4 class="text-lg font-semibold text-navy-primary mb-3">Đăng ký khoá học AI chuyên sâu dành cho giáo viên/giảng viên</h4>
-    <p class="mb-4">Để đăng ký tư vấn khoá học chuyên sâu dành cho Giáo viên và Giảng viên, Nghiên cứu khoa học, vui lòng nhắn tin vào boxchat trên màn hình, chúng tôi sẽ hỗ trợ ngay.</p>
-</div>
-                    `,
+                        <h4 class="text-lg font-semibold text-navy-primary mt-6 mb-3">Tóm tắt những điểm chính của ebook:</h4>
+                        <ul class="list-disc pl-6 mb-4 space-y-1">
+                            <li>AI là gì và tầm quan trọng của nó trong giáo dục.</li>
+                            <li>Vai trò của dữ liệu và kỹ năng viết prompt.</li>
+                            <li>Các ứng dụng và công cụ AI tiêu biểu.</li>
+                            <li>Cơ hội, thách thức và trách nhiệm của nhà giáo dục.</li>
+                            <li>Các bước thực hành cụ thể.</li>
+                        </ul>
+                        <h4 class="text-lg font-semibold text-navy-primary mt-6 mb-3">Khuyến khích thầy cô tiếp tục khám phá và ứng dụng AI:</h4>
+                        <p>"AI đang phát triển không ngừng, mỗi ngày đều có những công cụ và tính năng mới. Hãy giữ tinh thần ham học hỏi, sẵn sàng thử nghiệm và chia sẻ kinh nghiệm với đồng nghiệp."</p>
+                        <p>"Hãy nhớ rằng, AI là trợ thủ, không phải là người thay thế. Mục tiêu cuối cùng của chúng ta là sử dụng AI để nâng cao chất lượng dạy và học, khơi gợi tiềm năng và niềm đam mê học tập của học sinh."</p>
+                        <h4 class="text-lg font-semibold text-navy-primary mt-6 mb-3">Nguồn tài liệu/cộng đồng để học hỏi thêm:</h4>
+                        <ul class="list-disc pl-6 mb-4 space-y-1">
+                            <li><strong>Blog/Website (Tiếng Anh):</strong> EdTechReview, EdSurge, ClassTechTips.</li>
+                            <li><strong>Cộng đồng Facebook (Việt Nam):</strong> Tìm kiếm các nhóm như "Giáo viên sáng tạo cùng AI", "Ứng dụng công nghệ thông tin trong dạy học"...</li>
+                            <li><strong>Kênh YouTube:</strong> Theo dõi các kênh của chuyên gia giáo dục chia sẻ về AI và công nghệ.</li>
+                        </ul>
+                        
+                        <div class="mt-8 pt-6 border-t-2 border-gold-accent text-center">
+                            <h4 class="text-lg font-semibold text-navy-primary mb-3">Tư vấn chuyên sâu về ứng dụng AI trong giáo dục:</h4>
+                            <p>Để được tư vấn chuyên sâu, vui lòng liên hệ thầy <strong>Bùi Đăng Minh</strong>:</p>
+                            <p><i class="fas fa-phone text-gold-accent"></i> Điện thoại: 0918888691</p>
+                            <p><i class="fas fa-envelope text-gold-accent"></i> Email: pademy.vn@gmail.com</p>
+                        </div>
+                        <p class="mt-8 font-semibold text-lg text-center text-gold-accent">Chúc thầy cô thành công trên hành trình chinh phục AI và mang đến những bài học đột phá, truyền hứng cho học trò của mình!</p>
+                        
+                        <div class="interactive-box mt-10 text-center">
+                            <h4 class="text-lg font-semibold text-navy-primary mb-3">Phản Hồi Về Ebook</h4>
+                            <p class="mb-4">Chúng tôi rất mong nhận được những ý kiến đóng góp của thầy cô để hoàn thiện ebook này hơn nữa. Xin vui lòng chia sẻ cảm nhận và đề xuất của bạn!</p>
+                            <button onclick="alert('Cảm ơn bạn đã quan tâm! Tính năng gửi phản hồi đang được phát triển.')" class="action-button"><i class="fas fa-comment-dots"></i>Gửi Phản Hồi</button>
+                        </div>
+                    `
                 }
             ],
             glossary: {
@@ -1490,7 +1345,6 @@
                 ]
             };
         }
-
         const ch2Data = ebookData.chapters.find(c => c.id === 'chuong2');
         if (ch2Data) {
             ch2Data.quiz = {
@@ -1501,22 +1355,7 @@
                 ]
             };
         }
-
-
         document.addEventListener('DOMContentLoaded', () => {
-            const registrationModal = document.getElementById('registration-modal');
-    const closeRegistrationModalBtn = document.getElementById('close-registration-modal');
-    const registrationForm = document.getElementById('registration-form');
-    const formStatus = document.getElementById('form-status');
-    const submitBtn = document.getElementById('submit-registration-btn');
-    const submitBtnText = document.getElementById('submit-btn-text');
-    const submitBtnSpinner = document.getElementById('submit-btn-spinner');
-    const successModal = document.getElementById('success-modal');
-    // Gán sự kiện click cho nút đóng form đăng ký
-if(closeRegistrationModalBtn) {
-    closeRegistrationModalBtn.addEventListener('click', closeRegistrationModal);
-}
-    const closeSuccessModalBtn = document.getElementById('close-success-modal');
             const navigationMenu = document.getElementById('navigation-menu');
             const ebookContentArea = document.getElementById('ebook-content-area');
             const askGeminiBtn = document.getElementById('ask-gemini-btn');
@@ -1526,13 +1365,11 @@ if(closeRegistrationModalBtn) {
             const geminiPromptInput = document.getElementById('gemini-prompt-input');
             const geminiResponseArea = document.getElementById('gemini-response-area');
             const geminiLoadingIndicator = document.getElementById('gemini-loading-indicator');
-
             const notesModal = document.getElementById('notes-modal');
             const closeNotesModalBtn = document.getElementById('close-notes-modal');
             const saveNoteBtn = document.getElementById('save-note');
             const cancelNoteBtn = document.getElementById('cancel-note');
             const noteInput = document.getElementById('note-input');
-
             const glossaryModal = document.getElementById('glossary-modal');
             const closeGlossaryModalBtn = document.getElementById('close-glossary-modal');
             const glossaryTermTitle = document.getElementById('glossary-term-title');
@@ -1540,7 +1377,6 @@ if(closeRegistrationModalBtn) {
             
             const highlightColorPicker = document.getElementById('highlight-color-picker');
             const removeHighlightBtn = document.getElementById('remove-highlight-btn');
-
             const searchInput = document.getElementById('search-input');
             const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
             const sidebar = document.getElementById('sidebar');
@@ -1549,12 +1385,9 @@ if(closeRegistrationModalBtn) {
             const mainContentWrapper = document.getElementById('main-content-wrapper');
             const authorInfoSidebar = document.getElementById('author-info-sidebar');
             const mainEbookTitleDesktop = document.getElementById('main-ebook-title-desktop');
-
-
             let currentChapterId = null;
             let currentNoteContext = null; 
             let currentSelectionForHighlight = null;
-
             const chapterGroups = ebookData.chapters.reduce((acc, chapter) => {
                 const groupName = chapter.group || "Chung";
                 if (!acc[groupName]) {
@@ -1563,16 +1396,13 @@ if(closeRegistrationModalBtn) {
                 acc[groupName].push(chapter);
                 return acc;
             }, {});
-
             const navUl = document.createElement('ul');
             navUl.className = "space-y-1";
-
             Object.keys(chapterGroups).forEach(groupName => {
                 const groupTitleLi = document.createElement('li');
                 groupTitleLi.className = 'chapter-group-title';
                 groupTitleLi.textContent = groupName;
                 navUl.appendChild(groupTitleLi);
-
                 chapterGroups[groupName].forEach(chapter => {
                     const li = document.createElement('li');
                     const a = document.createElement('a');
@@ -1593,14 +1423,12 @@ if(closeRegistrationModalBtn) {
                 });
             });
             navigationMenu.appendChild(navUl);
-
             // Populate Author Info in Sidebar
             if (ebookData.meta.author) {
                 const authorTitle = document.createElement('div');
                 authorTitle.className = 'author-info-title';
                 authorTitle.textContent = 'Thông Tin Tác Giả';
                 authorInfoSidebar.appendChild(authorTitle);
-
                 const authorContent = document.createElement('div');
                 authorContent.className = 'author-info-content';
                 authorContent.innerHTML = `
@@ -1620,63 +1448,17 @@ if(closeRegistrationModalBtn) {
                     mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>';
                 }
             });
-
             sidebarOverlay.addEventListener('click', () => {
                 sidebar.classList.remove('open');
                 sidebarOverlay.classList.remove('active');
                 mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>';
             });
-            
-function getAdjacentChapters(currentChapterId) {
-            const chapters = ebookData.chapters;
-            const currentIndex = chapters.findIndex(c => c.id === currentChapterId);
-            return {
-                prev: currentIndex > 0 ? chapters[currentIndex - 1] : null,
-                next: currentIndex < chapters.length - 1 ? chapters[currentIndex + 1] : null
-            };
-        }
-
-        function getAdjacentChapters(currentChapterId) {
-            const chapters = ebookData.chapters;
-            const currentIndex = chapters.findIndex(c => c.id === currentChapterId);
-            return {
-                prev: currentIndex > 0 ? chapters[currentIndex - 1] : null,
-                next: currentIndex < chapters.length - 1 ? chapters[currentIndex + 1] : null
-            };
-        }
-
-        function addNavigationButtons(content, chapterId) {
-            const { prev, next } = getAdjacentChapters(chapterId);
-            let buttonsHTML = `
-                <div class="navigation-buttons">
-                    <div>
-                        ${prev ? `
-                            <button onclick="window.loadChapter('${prev.id}')">
-                                <i class="fas fa-arrow-left mr-2"></i>
-                                <span class="hidden sm:inline">${prev.title}</span>
-                                <span class="sm:hidden">Trước</span>
-                            </button>
-                        ` : '<div></div>' /* Placeholder để giữ vị trí */}
-                    </div>
-                    <div>
-                        ${next ? `
-                            <button onclick="window.loadChapter('${next.id}')">
-                                <span class="hidden sm:inline">${next.title}</span>
-                                <span class="sm:hidden">Tiếp</span>
-                                <i class="fas fa-arrow-right ml-2"></i>
-                            </button>
-                        ` : '<div></div>' /* Placeholder để giữ vị trí */}
-                    </div>
-                </div>`;
-            return content + buttonsHTML;
-        }
-            window.loadChapter = function(chapterId, searchTerm = null) {
+            function loadChapter(chapterId, searchTerm = null) {
                 const chapter = ebookData.chapters.find(c => c.id === chapterId);
-                if (!chapter) {  
+                if (!chapter) {
                     ebookContentArea.innerHTML = `<p class="text-red-500">Lỗi: Không tìm thấy chương.</p>`;
                     return;
                 }
-
                 currentChapterId = chapterId;
                 let content = ``;
                 
@@ -1695,7 +1477,6 @@ function getAdjacentChapters(currentChapterId) {
                      // If chapter.title for Lời Mở Đầu/Kết is distinct and needs displaying, add here.
                 }
                 content += chapter.contentHTML;
-
                 if (chapter.summary && chapter.summary.length > 0) {
                     content += `<div class="mt-10 pt-6 border-t-2 border-gold-accent">
                                     <h3 class="text-xl font-semibold text-navy-primary mb-3">Tóm Tắt Nội Dung Chương</h3>
@@ -1704,13 +1485,8 @@ function getAdjacentChapters(currentChapterId) {
                                     </ul>
                                 </div>`;
                 }
-                content = addNavigationButtons(content, chapterId);
                 ebookContentArea.innerHTML = content;
                 mobileChapterTitle.textContent = chapter.title; 
-const openRegBtn = document.getElementById('open-registration-btn');
-        if (openRegBtn) {
-            openRegBtn.addEventListener('click', openRegistrationModal);
-        }
                 if (chapter.quiz) {
                     const quizContainerId = `quiz-${chapter.id}`; 
                     const quizContainer = ebookContentArea.querySelector(`#${quizContainerId}`);
@@ -1722,13 +1498,11 @@ const openRegBtn = document.getElementById('open-registration-btn');
                 setupInteractiveElements();
                 loadHighlightsForChapter(chapterId);
                 loadNotesForChapter(chapterId);
-
                 if (searchTerm && searchTerm.length > 0) {
                     highlightSearchTermInContent(searchTerm);
                 } else {
                     clearSearchHighlights(); 
                 }
-
                 document.querySelectorAll('#navigation-menu a').forEach(a => {
                     a.classList.toggle('active', a.dataset.chapterId === chapterId);
                 });
@@ -1736,7 +1510,6 @@ const openRegBtn = document.getElementById('open-registration-btn');
                 document.getElementById('main-content').scrollTop = 0;
                 localStorage.setItem('lastVisitedChapter', chapterId);
             }
-
             function clearSearchHighlights() {
                 ebookContentArea.querySelectorAll('mark.search-highlight').forEach(mark => {
                     const parent = mark.parentNode;
@@ -1750,12 +1523,10 @@ const openRegBtn = document.getElementById('open-registration-btn');
             function highlightSearchTermInContent(term) {
                 clearSearchHighlights(); 
                 if (!term || term.length < 1) return;
-
                 const regex = new RegExp(term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
                 const treeWalker = document.createTreeWalker(ebookContentArea, NodeFilter.SHOW_TEXT, null, false);
                 let node;
                 const nodesToProcess = [];
-
                 while (node = treeWalker.nextNode()) {
                     if (node.nodeValue.toLowerCase().includes(term.toLowerCase()) && 
                         node.parentNode && 
@@ -1765,16 +1536,13 @@ const openRegBtn = document.getElementById('open-registration-btn');
                         nodesToProcess.push(node);
                     }
                 }
-
                 nodesToProcess.forEach(textNode => {
                     const parent = textNode.parentNode;
                     if (!parent) return; 
-
                     let currentText = textNode.nodeValue;
                     let match;
                     let lastIndex = 0;
                     const fragment = document.createDocumentFragment();
-
                     while ((match = regex.exec(currentText)) !== null) {
                         if (match.index > lastIndex) {
                             fragment.appendChild(document.createTextNode(currentText.substring(lastIndex, match.index)));
@@ -1794,8 +1562,6 @@ const openRegBtn = document.getElementById('open-registration-btn');
                     }
                 });
             }
-
-
             function renderQuiz(quizData, container) {
                 let quizHTML = '';
                 quizData.questions.forEach((q, index) => {
@@ -1816,17 +1582,14 @@ const openRegBtn = document.getElementById('open-registration-btn');
                 });
                 quizHTML += `<button class="submit-quiz-btn mt-4" data-quiz-id="${quizData.id}">Nộp Bài</button>`;
                 container.innerHTML = quizHTML;
-
                 container.querySelector(`.submit-quiz-btn[data-quiz-id="${quizData.id}"]`).addEventListener('click', () => {
                     submitQuiz(quizData.id);
                 });
             }
-
             function submitQuiz(quizId) {
                 const chapterWithQuiz = ebookData.chapters.find(c => c.quiz && c.quiz.id === quizId);
                 if (!chapterWithQuiz || !chapterWithQuiz.quiz) return;
                 const quizData = chapterWithQuiz.quiz;
-
                 let score = 0;
                 quizData.questions.forEach(q => {
                     const selectedOption = document.querySelector(`input[name="q_${q.id}"]:checked`);
@@ -1861,7 +1624,6 @@ const openRegBtn = document.getElementById('open-registration-btn');
                         }
                     });
                 });
-
                 const showSuggestionBtn = document.getElementById('show-suggestion-btn');
                 if (showSuggestionBtn) {
                     showSuggestionBtn.addEventListener('click', () => {
@@ -1878,7 +1640,6 @@ const openRegBtn = document.getElementById('open-registration-btn');
                     });
                 }
             }
-
             askGeminiBtn.addEventListener('click', () => {
                 geminiModal.classList.remove('hidden');
                 geminiModal.classList.add('flex');
@@ -1888,18 +1649,15 @@ const openRegBtn = document.getElementById('open-registration-btn');
                 geminiModal.classList.add('hidden');
                 geminiModal.classList.remove('flex');
             });
-
             submitGeminiPromptBtn.addEventListener('click', async () => {
                 const prompt = geminiPromptInput.value.trim();
                 if (!prompt) {
                     geminiResponseArea.innerHTML = `<p class="text-red-500">Vui lòng nhập câu hỏi hoặc yêu cầu.</p>`;
                     return;
                 }
-
                 geminiResponseArea.innerHTML = `<p class="text-gray-500 italic">Đang chờ phản hồi từ Gemini...</p>`;
                 geminiLoadingIndicator.classList.remove('hidden');
                 submitGeminiPromptBtn.disabled = true;
-
                 try {
                     let chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
                     const payload = { contents: chatHistory };
@@ -1911,14 +1669,12 @@ const openRegBtn = document.getElementById('open-registration-btn');
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(payload)
                     });
-
                     if (!response.ok) {
                         const errorData = await response.json();
                         throw new Error(`API Error: ${response.status} - ${errorData.error?.message || 'Unknown error'}`);
                     }
                     
                     const result = await response.json();
-
                     if (result.candidates && result.candidates.length > 0 &&
                         result.candidates[0].content && result.candidates[0].content.parts &&
                         result.candidates[0].content.parts.length > 0) {
@@ -1934,7 +1690,6 @@ const openRegBtn = document.getElementById('open-registration-btn');
                         geminiResponseArea.innerHTML = `<p class="text-orange-500">Không nhận được nội dung hợp lệ từ Gemini.</p>`;
                         console.warn("Unexpected Gemini API response structure:", result);
                     }
-
                 } catch (error) {
                     console.error("Error calling Gemini API:", error);
                     geminiResponseArea.innerHTML = `<p class="text-red-500">Đã xảy ra lỗi khi kết nối với Gemini: ${error.message}. Vui lòng thử lại sau.</p>`;
@@ -1943,7 +1698,6 @@ const openRegBtn = document.getElementById('open-registration-btn');
                     submitGeminiPromptBtn.disabled = false;
                 }
             });
-
             function openNotesModal(context, existingNote = '') {
                 currentNoteContext = context;
                 noteInput.value = existingNote;
@@ -1951,7 +1705,6 @@ const openRegBtn = document.getElementById('open-registration-btn');
                 notesModal.classList.add('flex');
                 noteInput.focus();
             }
-
             closeNotesModalBtn.addEventListener('click', () => {
                 notesModal.classList.add('hidden');
                 notesModal.classList.remove('flex');
@@ -1960,11 +1713,9 @@ const openRegBtn = document.getElementById('open-registration-btn');
                 notesModal.classList.add('hidden');
                 notesModal.classList.remove('flex');
             });
-
             saveNoteBtn.addEventListener('click', () => {
                 const noteText = noteInput.value.trim();
                 if (!currentNoteContext) return;
-
                 const notes = JSON.parse(localStorage.getItem(`ebook_notes_${currentChapterId}`)) || {};
                 
                 if (noteText) {
@@ -1983,7 +1734,6 @@ const openRegBtn = document.getElementById('open-registration-btn');
                 if (!element || !element.parentNode) return ''; 
                 if (element.id !== '') return `id("${element.id}")`;
                 if (element === document.body) return element.tagName.toLowerCase();
-
                 var ix = 0;
                 var siblings = element.parentNode.childNodes;
                 for (var i = 0; i < siblings.length; i++) {
@@ -1993,7 +1743,6 @@ const openRegBtn = document.getElementById('open-registration-btn');
                 }
                 return ''; 
             }
-
             function getElementByXPath(path) {
                 if (!path) return null;
                 try {
@@ -2003,16 +1752,12 @@ const openRegBtn = document.getElementById('open-registration-btn');
                     return null;
                 }
             }
-
-
             function loadNotesForChapter(chapterId) {
                 ebookContentArea.querySelectorAll('.note-indicator').forEach(ind => ind.remove());
-
                 const notes = JSON.parse(localStorage.getItem(`ebook_notes_${chapterId}`)) || {};
                 Object.keys(notes).forEach(noteId => {
                     const noteData = notes[noteId];
                     let targetElementForIndicator = null;
-
                     if (noteData.selection && noteData.selection.type === 'highlight' && noteData.selection.highlightId) {
                         targetElementForIndicator = ebookContentArea.querySelector(`.highlighted-text[data-highlight-id='${noteData.selection.highlightId}']`);
                     } else if (noteData.selection && noteData.selection.startContainerXPath) { 
@@ -2055,8 +1800,6 @@ const openRegBtn = document.getElementById('open-registration-btn');
                     }
                 });
             }
-
-
             closeGlossaryModalBtn.addEventListener('click', () => {
                 glossaryModal.classList.add('hidden');
                 glossaryModal.classList.remove('flex');
@@ -2080,7 +1823,6 @@ const openRegBtn = document.getElementById('open-registration-btn');
                     }
                 }
             });
-
             function positionHighlightColorPicker(x, y) {
                 const mainContentRect = mainContentWrapper.getBoundingClientRect();
                 highlightColorPicker.style.left = `${x - mainContentRect.left}px`;
@@ -2091,7 +1833,6 @@ const openRegBtn = document.getElementById('open-registration-btn');
                 highlightColorPicker.style.display = 'none';
                 currentSelectionForHighlight = null;
             }
-
             highlightColorPicker.querySelectorAll('button[data-color]').forEach(button => {
                 button.addEventListener('click', (e) => {
                     e.stopPropagation();
@@ -2111,7 +1852,6 @@ const openRegBtn = document.getElementById('open-registration-btn');
                 }
                 hideHighlightColorPicker();
             });
-
             function applyHighlight(range, color) {
                 if (range.collapsed) return;
                 try {
@@ -2131,7 +1871,6 @@ const openRegBtn = document.getElementById('open-registration-btn');
                             }
                         });
                     }
-
                     const span = document.createElement('span');
                     span.className = 'highlighted-text';
                     span.style.backgroundColor = color;
@@ -2145,7 +1884,6 @@ const openRegBtn = document.getElementById('open-registration-btn');
                         const existingNote = notes[highlightId] ? notes[highlightId].text : '';
                         openNotesModal({ id: highlightId, selection: { type: 'highlight', highlightId: highlightId } }, existingNote);
                     });
-
                     range.surroundContents(span);
                     window.getSelection().removeAllRanges();
                 } catch (ex) {
@@ -2166,7 +1904,6 @@ const openRegBtn = document.getElementById('open-registration-btn');
                     
                     const nodeRange = document.createRange();
                     nodeRange.selectNodeContents(node);
-
                     const highlightRange = range.cloneRange();
                     highlightRange.selectNodeContents(node); 
                     
@@ -2175,7 +1912,6 @@ const openRegBtn = document.getElementById('open-registration-btn');
                     
                     highlightRange.setStart(node, startOffset);
                     highlightRange.setEnd(node, endOffset);
-
                     if (!highlightRange.collapsed) {
                         try {
                             const clonedSpan = span.cloneNode(true);
@@ -2193,8 +1929,6 @@ const openRegBtn = document.getElementById('open-registration-btn');
                 });
                 window.getSelection().removeAllRanges();
             }
-
-
             function getTextNodesInRange(range) {
                 const textNodes = [];
                 const treeWalker = document.createTreeWalker(
@@ -2209,8 +1943,6 @@ const openRegBtn = document.getElementById('open-registration-btn');
                 while (treeWalker.nextNode()) textNodes.push(treeWalker.currentNode);
                 return textNodes;
             }
-
-
             function unwrapHighlight(span) {
                 const parent = span.parentNode;
                 if (!parent) return;
@@ -2220,13 +1952,10 @@ const openRegBtn = document.getElementById('open-registration-btn');
                 parent.removeChild(span);
                 parent.normalize(); 
             }
-
             function removeHighlight(range) {
                 const commonAncestor = range.commonAncestorContainer;
                 const spansToRemove = [];
-
                 if (!commonAncestor) return;
-
                 let parentElement = commonAncestor;
                 if (commonAncestor.nodeType !== Node.ELEMENT_NODE) {
                     parentElement = commonAncestor.parentNode;
@@ -2250,8 +1979,6 @@ const openRegBtn = document.getElementById('open-registration-btn');
                 removeHighlightFromStorage(range);
                 window.getSelection().removeAllRanges();
             }
-
-
             function serializeRange(range) {
                 if (!range || !range.startContainer || !range.endContainer || !range.commonAncestorContainer) return null;
                 return {
@@ -2262,7 +1989,6 @@ const openRegBtn = document.getElementById('open-registration-btn');
                     commonAncestorXPath: getPathTo(range.commonAncestorContainer)
                 };
             }
-
             function deserializeRange(serializedRange) {
                 if (!serializedRange) return null;
                 const range = document.createRange();
@@ -2281,12 +2007,10 @@ const openRegBtn = document.getElementById('open-registration-btn');
                     return null;
                 }
             }
-
             function saveHighlight(range, color) {
                 if (!currentChapterId) return;
                 const serialized = serializeRange(range);
                 if (!serialized) return; 
-
                 const highlights = JSON.parse(localStorage.getItem(`ebook_highlights_${currentChapterId}`)) || [];
                 highlights.push({ range: serialized, color: color });
                 localStorage.setItem(`ebook_highlights_${currentChapterId}`, JSON.stringify(highlights));
@@ -2297,7 +2021,6 @@ const openRegBtn = document.getElementById('open-registration-btn');
                 let highlights = JSON.parse(localStorage.getItem(`ebook_highlights_${currentChapterId}`)) || [];
                 const serializedToRemove = serializeRange(rangeToRemove);
                 if (!serializedToRemove) return;
-
                 highlights = highlights.filter(h => {
                     return !(h.range.commonAncestorXPath === serializedToRemove.commonAncestorXPath &&
                              Math.abs(h.range.startOffset - serializedToRemove.startOffset) < 5 && 
@@ -2305,11 +2028,8 @@ const openRegBtn = document.getElementById('open-registration-btn');
                 });
                 localStorage.setItem(`ebook_highlights_${currentChapterId}`, JSON.stringify(highlights));
             }
-
-
             function loadHighlightsForChapter(chapterId) {
                 ebookContentArea.querySelectorAll('span.highlighted-text').forEach(span => unwrapHighlight(span));
-
                 const highlights = JSON.parse(localStorage.getItem(`ebook_highlights_${chapterId}`)) || [];
                 highlights.forEach(h => {
                     const range = deserializeRange(h.range);
@@ -2323,7 +2043,6 @@ const openRegBtn = document.getElementById('open-registration-btn');
                 if (event.target.closest('.highlighted-text, .glossary-term, button, a, input, textarea, .quiz-options')) {
                     return;
                 }
-
                 const selection = window.getSelection();
                 if (selection.rangeCount > 0 && !selection.isCollapsed) {
                     const range = selection.getRangeAt(0);
@@ -2338,7 +2057,6 @@ const openRegBtn = document.getElementById('open-registration-btn');
                     }
                 }
             });
-
             // Search Functionality
             searchInput.addEventListener('input', (e) => {
                 const searchTerm = e.target.value.trim();
@@ -2346,60 +2064,6 @@ const openRegBtn = document.getElementById('open-registration-btn');
                     loadChapter(currentChapterId, searchTerm); 
                 }
             });
-
-function openRegistrationModal() {
-        registrationModal.classList.remove('hidden');
-        registrationModal.classList.add('flex');
-    }
-
-    function closeRegistrationModal() {
-        registrationModal.classList.add('hidden');
-        registrationModal.classList.remove('flex');
-        formStatus.innerHTML = '';
-        registrationForm.reset();
-    }
-
-    closeRegistrationModalBtn.addEventListener('click', closeRegistrationModal);
-    registrationModal.addEventListener('click', (event) => {
-        if(event.target === registrationModal) {
-            closeRegistrationModal();
-        }
-    });
-
-    registrationForm.addEventListener("submit", async function(event) {
-        event.preventDefault();
-
-        submitBtn.disabled = true;
-        submitBtnText.textContent = "Đang gửi...";
-        submitBtnSpinner.classList.remove('hidden');
-        formStatus.innerHTML = '';
-        const data = new FormData(event.target);
-        try {
-            // !!! QUAN TRỌNG: THAY THẾ BẰNG URL FORMSPREE CỦA BẠN !!!
-            const response = await fetch("https://formspree.io/f/mnnvjjqg", {
-                method: "POST",
-                body: data,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            });
-
-            // --- BẮT ĐẦU ĐOẠN MÃ THAY THẾ ---
-if (response.ok) {
-    closeRegistrationModal(); // Đóng form đăng ký
-    // Hiển thị popup thành công
-    successModal.classList.remove('hidden');
-    successModal.classList.add('flex');
-}
-// --- KẾT THÚC ĐOẠN MÃ THAY THẾ ---
-        } catch (error) {
-            formStatus.innerHTML = `<p class="error">Đã xảy ra lỗi khi gửi. Vui lòng thử lại.</p>`;
-        } finally {
-            submitBtn.disabled = false;
-            submitBtnText.textContent = "Gửi Đăng Ký";
-            submitBtnSpinner.classList.add('hidden');
-        }
-    });
             const lastChapter = localStorage.getItem('lastVisitedChapter');
             if (lastChapter && ebookData.chapters.find(c => c.id === lastChapter)) {
                 loadChapter(lastChapter);
@@ -2410,9 +2074,8 @@ if (response.ok) {
              if (!currentChapterId && mainEbookTitleDesktop) { // Check if mainEbookTitleDesktop exists
                 mainEbookTitleDesktop.textContent = ebookData.meta.title;
             }
-
-
         });
     </script>
 </body>
 </html>
+
